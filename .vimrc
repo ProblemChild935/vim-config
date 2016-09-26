@@ -27,8 +27,6 @@ Plug 'fatih/vim-go'
   let g:go_highlight_operators = 1
   let g:go_highlight_build_constraints = 1
 
-Plug 'rjohnsondev/vim-compiler-go'
-	
 " Linting	
 " Syntactistic
 Plug 'scrooloose/syntastic'
