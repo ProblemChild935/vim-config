@@ -1,4 +1,3 @@
-call plug#begin('~/.vim/plugged')
 
 " Inserts spaces when Tab is pressed
 set expandtab
@@ -6,12 +5,70 @@ set expandtab
 set tabstop=2
 " number of space characters inserted for indentation
 set shiftwidth=2
+" Sets the nubmer of columns for a TAB
+set softtabstop=2
+" scroll is offset so that the curser is always in the center of the screen
+:set scrolloff=999
+
+" autoindent
+set ai
+
+" Incremental Search
+ set incsearch
+" Search Highlighting
+ set hlsearch
+
+" Set line numbers
+set number
+set relativenumber
+
+" PHP + html autoindent
+:function MyIndentPhpHtml()
+: set ft=html
+: normal gg=G
+: set ft=php
+: normal gg=G
+:endfunction
+nnoremap <C-S-l> :call MyIndentPhpHtml()<cr>
+
+call plug#begin('~/.vim/plugged')
+
+"" Easymotion for prompts to lines
+"Plug 'easymotion/vim-easymotion'
+"
+"" Insearch for better search txt Highlighting
+"Plug 'haya14busa/incsearch.vim'
+"" :h g:incsearch#auto_nohlsearch
+" set hlsearch
+" let g:incsearch#auto_nohlsearch = 1
+" map n  <Plug>(incsearch-nohl-n)
+" map N  <Plug>(incsearch-nohl-N)
+" map *  <Plug>(incsearch-nohl-*)
+" map #  <Plug>(incsearch-nohl-#)
+" map g* <Plug>(incsearch-nohl-g*)
+" map g# <Plug>(incsearch-nohl-g#)
+
+" fugative for git integration
+Plug 'tpope/vim-fugitive'
+
+" adds git info to the gutter
+Plug 'airblade/vim-gitgutter'
+
+" indent guides
+Plug 'nathanaelkane/vim-indent-guides'
+
+" Auto resizing of vim windows
+Plug 'roman/golden-ratio'
+
+" Vim todo
+Plug 'dhruvasagar/vim-dotoo'
 
 " Language
 
 " vim-javascript
 Plug 'pangloss/vim-javascript'
 	let g:javascript_plugin_jsdoc = 1
+  
 " vim indent guides
 Plug 'nathanaelkane/vim-indent-guides'
 
@@ -20,12 +77,19 @@ Plug 'elzr/vim-json'
 
 " vim-go plugin by faith
 Plug 'fatih/vim-go'
+  let g:go_fmt_command = "goimports"
   let g:go_highlight_functions = 1
   let g:go_highlight_methods = 1
   let g:go_highlight_fields = 1
   let g:go_highlight_types = 1
   let g:go_highlight_operators = 1
   let g:go_highlight_build_constraints = 1
+
+" Fuzzy file loader
+Plug 'kien/ctrlp.vim'
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+
+  let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " Linting	
 " Syntactistic
@@ -44,9 +108,6 @@ Plug 'scrooloose/syntastic'
 	let g:syntastic_check_on_open = 1
 	let g:syntastic_check_on_wq = 0
 
-" Prefer local ESLint install over global 
-Plug 'mtscout6/syntastic-local-eslint.vim'	
- 
 "Auto-complete
 " Neocomplete
 Plug 'shougo/neocomplete.vim'
@@ -56,19 +117,28 @@ Plug 'shougo/neocomplete.vim'
 	let g:neocomplete#enable_smart_case = 1
 	" AutoComplPop like behavior.
 	let g:neocomplete#enable_auto_select = 1
+  " <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 	" Enable omni completion.
 	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-	autocmd FileType html,markdown setlocal	omnifunc=htmlcomplete#CompleteTags 
+	autocmd FileType html, markdown setlocal	omnifunc=htmlcomplete#CompleteTags 
 	autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-	
-" Code Navigation
-" Numbers
-Plug 'myusuf3/numbers.vim'
-	set number
+
+" Php complete extended for neocomplete
+    " Phpcomplete dependencies
+    Plug 'shougo/vimproc.vim', {'do' : 'make'}
+    " Unite adds sorces to the onmicomplete for phpcomplete	
+    Plug 'Shougo/unite.vim'
+  Plug 'm2mdas/phpcomplete-extended'  
+    autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
 
 "diaplay
 " molokai theme for vim
 Plug 'fatih/molokai'
+
+" golden ratio for vim windows
+Plug 'roman/golden-ratio'
+  let g:golden_ratio_wrap_ignored = 1
 
 " Vim Airline
 Plug 'bling/vim-airline'
@@ -80,16 +150,6 @@ Plug 'bling/vim-airline'
 
 " Themes for Airline
 Plug 'vim-airline/vim-airline-themes'
-
-
-" Navigation
-Plug 'ctrlpvim/ctrlp.vim'
-	set runtimepath^=~/.vim/bundle/ctrlp.vim
-	let g:ctrlp_map = '<c-p>'
-	let g:ctrlp_cmd = 'CtrlP'
-	let g:ctrlp_working_path_mode = 'ra'
-	let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-	set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
 	
 " Add Plugins to &runtimepath
 call plug#end()
