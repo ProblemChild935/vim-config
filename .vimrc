@@ -1,3 +1,6 @@
+if &diff
+  syntax off
+endif
 
 " Inserts spaces when Tab is pressed
 set expandtab
@@ -17,6 +20,9 @@ set ai
  set incsearch
 " Search Highlighting
  set hlsearch
+
+" Colour Scheme 
+colorscheme molokai
 
 " Set line numbers
 set number
@@ -69,9 +75,6 @@ Plug 'dhruvasagar/vim-dotoo'
 Plug 'pangloss/vim-javascript'
 	let g:javascript_plugin_jsdoc = 1
   
-" vim indent guides
-Plug 'nathanaelkane/vim-indent-guides'
-
 " Json sintax highlighter
 Plug 'elzr/vim-json'
 
@@ -102,7 +105,8 @@ Plug 'scrooloose/syntastic'
 	let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 	let g:go_list_type = "quickfix"
 
-	let g:syntastic_javascript_checkers = ['eslint']
+	" let g:syntastic_javascript_checkers = ['eslint']
+  let g:syntastic_php_checkers = ['php']
 	let g:syntastic_always_populate_loc_list = 1
 	let g:syntastic_auto_loc_list = 1
 	let g:syntastic_check_on_open = 1
@@ -117,12 +121,20 @@ Plug 'shougo/neocomplete.vim'
 	let g:neocomplete#enable_smart_case = 1
 	" AutoComplPop like behavior.
 	let g:neocomplete#enable_auto_select = 1
+  " Define dictionary.
+  let g:neocomplete#sources#dictionary#dictionaries = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+          \ }
   " <TAB>: completion.
   inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 	" Enable omni completion.
 	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 	autocmd FileType html, markdown setlocal	omnifunc=htmlcomplete#CompleteTags 
 	autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Php complete extended for neocomplete
     " Phpcomplete dependencies
@@ -132,6 +144,15 @@ Plug 'shougo/neocomplete.vim'
   Plug 'm2mdas/phpcomplete-extended'  
     autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
 
+" Snippets
+" Neosnippets
+Plug 'shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+    " Plugin key-mappings.
+    " " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+   imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+   smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+   xmap <C-k>     <Plug>(neosnippet_expand_target)
 "diaplay
 " molokai theme for vim
 Plug 'fatih/molokai'
@@ -139,6 +160,9 @@ Plug 'fatih/molokai'
 " golden ratio for vim windows
 Plug 'roman/golden-ratio'
   let g:golden_ratio_wrap_ignored = 1
+" Php with html indenting
+Plug 'captbaritone/better-indent-support-for-php-with-html'
+
 
 " Vim Airline
 Plug 'bling/vim-airline'
