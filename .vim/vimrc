@@ -186,9 +186,6 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " Plugin options
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
 " Vim Airline
 Plug 'bling/vim-airline'
 " enables airline at startup
