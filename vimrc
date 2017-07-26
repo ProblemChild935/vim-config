@@ -42,6 +42,8 @@ set relativenumber
 :endfunction
 nnoremap <C-S-l> :call MyIndentPhpHtml()<cr>
 
+" Close preview after leaving insert
+autocmd CompleteDone * pclose
 
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
@@ -142,7 +144,7 @@ let g:neocomplete#sources#dictionary#dictionaries = {
 
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  "return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  "return (pumvisible() ? \"\<C-y>" : \"" ) . \"\<CR>"
   " For no inserting <CR> key.
   return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
@@ -150,7 +152,8 @@ endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " Close popup by <Space>.
-" inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+"inoremap <expr><Space> pumvisible() ? \"\<C-y>" : \"\<Space>"
+
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
