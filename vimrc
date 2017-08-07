@@ -18,6 +18,15 @@ set softtabstop=2
 " scroll is offset so that the curser is always in the center of the screen
 :set scrolloff=999
 
+" Sets \ as the leader for vim 
+let mapleader="\<space>"
+
+" VimGo shortcuts
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
 " autoindent
 set ai
 
