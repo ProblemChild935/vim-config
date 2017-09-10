@@ -75,13 +75,24 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 " Multiple Plug commands can be written in a single line using | separators
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " On-demand loading
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Json sintax highlighter
 Plug 'elzr/vim-json'
+
+" Css autoPrefixer
+Plug 'ai/autoprefixer'
+Plug 'ioannis-kapoulas/vim-autoprefixer'
+
+" Emmet snippets
+Plug 'mattn/emmet-vim'
+let g:user_emmet_leader_key=','
+
+" Css color preview
+Plug 'gorodinskiy/vim-coloresque'
 
 " Class Outliner
 Plug 'majutsushi/tagbar'
@@ -112,6 +123,7 @@ let g:tagbar_type_go = {
       \ 'ctagsbin'  : 'gotags',
       \ 'ctagsargs' : '-sort -silent'
       \ }
+nmap <F8> :TagbarToggle<CR>
 
 " Linting	
 " Syntactistic
