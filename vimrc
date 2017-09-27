@@ -1,7 +1,11 @@
 syntax enable  
-filetype plugin on  
-set number
+" Set colorscheme
 colorscheme molokai
+
+" Prerequisits for vimwiki
+set nocompatible
+filetype plugin on  
+syntax on
 
 if &diff
   syntax off
@@ -27,13 +31,24 @@ au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 
+" Set gohtml as ft html
+au BufNewFile,BufRead *.gohtml setf html
+
 " autoindent
 set ai
 
 " Incremental Search
 set incsearch
+" Ignore case while searching unless uppercase characters are used
+set ignorecase
+set smartcase
 " Search Highlighting
 set hlsearch
+nmap <leader>q :nohlsearch<CR>
+
+" Navigate through wraped lines
+nmap j gj
+nmap k gk
 
 " Colour Scheme 
 colorscheme molokai
@@ -82,6 +97,9 @@ Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 " Json sintax highlighter
 Plug 'elzr/vim-json'
+
+" Vim wiki
+Plug 'vimwiki/vimwiki'
 
 " Css autoPrefixer
 Plug 'ai/autoprefixer'
@@ -178,7 +196,7 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType html,gohtml,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
@@ -192,6 +210,7 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 
 " vim-go plugin by faith
 Plug 'fatih/vim-go'
+"let g:go_fmt_command = "goimports"
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
