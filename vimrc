@@ -99,7 +99,7 @@ Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 Plug 'elzr/vim-json'
 
 " Vim wiki
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 
 " Css autoPrefixer
 Plug 'ai/autoprefixer'
