@@ -47,8 +47,8 @@ set hlsearch
 nmap <leader>q :nohlsearch<CR>
 
 " Navigate through wraped lines
-nmap j gj
-nmap k gk
+" nmap j gj
+" nmap k gk
 
 " Colour Scheme 
 colorscheme molokai
@@ -67,7 +67,8 @@ set relativenumber
 nnoremap <C-S-l> :call MyIndentPhpHtml()<cr>
 
 " Close preview after leaving insert
-autocmd CompleteDone * pclose
+" autocmd CompleteDone * pclose
+autocmd InsertLeave * pclose
 
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
@@ -206,6 +207,8 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_or_jump)
 
 
 " vim-go plugin by faith
